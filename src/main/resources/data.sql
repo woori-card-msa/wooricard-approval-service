@@ -11,10 +11,12 @@ INSERT INTO cards (id, card_number, card_type, card_status, expiry_date, credit_
 (4, '6011111111111117', 'CREDIT', 'ACTIVE', '2027-12-31', 5000000.00, 0.00, '$2a$10$vg3Gcw.lMS4okoXKpIML.eaRt5Sni8zObcwADbcm1SZS0ymxJXkli', 'CUST-004', NOW(), 0),
 (5, '3530111333300000', 'CREDIT', 'ACTIVE', '2027-12-31', 3000000.00, 2500000.00, '$2a$10$vg3Gcw.lMS4okoXKpIML.eaRt5Sni8zObcwADbcm1SZS0ymxJXkli', 'CUST-005', NOW(), 0),
 (6, '5105105105105100', 'DEBIT', 'SUSPENDED', '2027-12-31', NULL, NULL, '$2a$10$vg3Gcw.lMS4okoXKpIML.eaRt5Sni8zObcwADbcm1SZS0ymxJXkli', 'CUST-006', NOW(), 0),
-(7, '4012888888881881', 'DEBIT', 'ACTIVE', '2024-12-31', NULL, NULL, '$2a$10$vg3Gcw.lMS4okoXKpIML.eaRt5Sni8zObcwADbcm1SZS0ymxJXkli', 'CUST-007', NOW(), 0);
+(7, '4012888888881881', 'DEBIT', 'ACTIVE', '2024-12-31', NULL, NULL, '$2a$10$vg3Gcw.lMS4okoXKpIML.eaRt5Sni8zObcwADbcm1SZS0ymxJXkli', 'CUST-007', NOW(), 0),
+(8, '7011111111111117', 'CREDIT', 'ACTIVE', '2027-12-31', 5000000.00, 0.00, '$2a$10$vg3Gcw.lMS4okoXKpIML.eaRt5Sni8zObcwADbcm1SZS0ymxJXkli', 'CUST-008', NOW(), 0),
+(9, '8011111111111117', 'CREDIT', 'ACTIVE', '2027-12-31', 5000000.00, 0.00, '$2a$10$vg3Gcw.lMS4okoXKpIML.eaRt5Sni8zObcwADbcm1SZS0ymxJXkli', 'CUST-009', NOW(), 0);
 
 -- 승인 테스트 데이터
 INSERT INTO authorizations (transaction_id, card_number_masked, amount, merchant_id, approval_number, response_code, status, authorization_date, created_at) VALUES
 ('TXN-TEST-001', '6011-****-****-1117', 50000.00, 'MERCHANT-001', '12345678', '00', 'APPROVED', '2026-03-20 10:00:00', NOW()),
-('TXN-TEST-002', '7011-****-****-2117', 30000.00, 'MERCHANT-002', '23456789', '00', 'APPROVED', '2026-03-20 11:00:00', NOW()),
-('TXN-TEST-003', '8011-****-****-3117', 75000.00, 'MERCHANT-001', '34567890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW());
+('TXN-TEST-002', '7011-****-****-1117', 30000.00, 'MERCHANT-002', '23456789', '00', 'APPROVED', '2026-03-20 11:00:00', NOW()),
+('TXN-TEST-003', '8011-****-****-1117', 75000.00, 'MERCHANT-001', '34567890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW());
