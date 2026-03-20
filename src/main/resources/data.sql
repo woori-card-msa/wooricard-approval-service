@@ -19,4 +19,9 @@ INSERT INTO cards (id, card_number, card_type, card_status, expiry_date, credit_
 INSERT INTO authorizations (transaction_id, card_number_masked, amount, merchant_id, approval_number, response_code, status, authorization_date, created_at) VALUES
 ('TXN-TEST-001', '6011-****-****-1117', 50000.00, 'MERCHANT-001', '12345678', '00', 'APPROVED', '2026-03-20 10:00:00', NOW()),
 ('TXN-TEST-002', '7011-****-****-1117', 30000.00, 'MERCHANT-002', '23456789', '00', 'APPROVED', '2026-03-20 11:00:00', NOW()),
-('TXN-TEST-003', '8011-****-****-1117', 75000.00, 'MERCHANT-001', '34567890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW());
+('TXN-TEST-003', '8011-****-****-1117', 75000.00, 'MERCHANT-001', '34567890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW()),
+('TXN-TEST-004', '6011-****-****-1117', 75000.00, 'MERCHANT-001', '34367890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW()),
+('TXN-TEST-005', '8011-****-****-1117', 75000.00, 'MERCHANT-001', '34467890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW()),
+('TXN-TEST-006', '7011-****-****-1117', 75000.00, 'MERCHANT-002', '34667890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW()),
+('TXN-TEST-007', '8011-****-****-1117', 75000.00, 'MERCHANT-002', '34767890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW()),
+('TXN-TEST-008', '8011-****-****-1117', 75000.00, 'MERCHANT-003', '34867890', '00', 'APPROVED', '2026-03-21 14:00:00', NOW());
