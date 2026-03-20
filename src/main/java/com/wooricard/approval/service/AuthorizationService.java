@@ -1,6 +1,7 @@
 package com.wooricard.approval.service;
 
 import com.wooricard.approval.client.BankClient;
+import com.wooricard.approval.dto.ApprovalDto;
 import com.wooricard.approval.dto.AuthorizationRequest;
 import com.wooricard.approval.dto.AuthorizationResponse;
 import com.wooricard.approval.dto.BalanceResponse;
@@ -15,10 +16,13 @@ import com.wooricard.approval.repository.AuthorizationRepository;
 import com.wooricard.approval.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -419,6 +423,18 @@ public class AuthorizationService {
                 .cancelDate(cancelDate)
                 .cancelled(true)
                 .build();
+    }
+
+    /**
+     * 승인 내역 조회 (날짜 기준 페이징)
+     */
+    @Transactional(readOnly = true)
+    public Page<ApprovalDto> getAuthorizations(LocalDate date, AuthorizationStatus status, int page, int size) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(23, 59, 59);
+
+        return authorizationRepository.findByStatusAndDateRange(status, startOfDay, endOfDay, PageRequest.of(page, size))
+                .map(ApprovalDto::from);
     }
 
     /**

@@ -43,7 +43,7 @@ public class OpenApiConfig {
                                 .email("support@cardpayment.com")))
                 .servers(List.of(
                         new Server()
-                                .url("http://localhost:9090")
+                                .url("http://localhost:8081")
                                 .description("로컬 개발 서버")
                 ));
     }

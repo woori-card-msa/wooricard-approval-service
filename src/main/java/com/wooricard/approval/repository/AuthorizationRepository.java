@@ -2,6 +2,8 @@ package com.wooricard.approval.repository;
 
 import com.wooricard.approval.entity.Authorization;
 import com.wooricard.approval.entity.AuthorizationStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -60,5 +62,14 @@ public interface AuthorizationRepository extends JpaRepository<Authorization, Lo
         @Param("status") AuthorizationStatus status,
         @Param("startDate") LocalDateTime startDate,
         @Param("endDate") LocalDateTime endDate
+    );
+
+    @Query("SELECT a FROM Authorization a WHERE a.status = :status " +
+           "AND a.authorizationDate BETWEEN :startDate AND :endDate")
+    Page<Authorization> findByStatusAndDateRange(
+        @Param("status") AuthorizationStatus status,
+        @Param("startDate") LocalDateTime startDate,
+        @Param("endDate") LocalDateTime endDate,
+        Pageable pageable
     );
 }

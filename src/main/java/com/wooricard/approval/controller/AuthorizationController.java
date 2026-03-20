@@ -1,9 +1,11 @@
 package com.wooricard.approval.controller;
 
+import com.wooricard.approval.dto.ApprovalDto;
 import com.wooricard.approval.dto.AuthorizationRequest;
 import com.wooricard.approval.dto.AuthorizationResponse;
 import com.wooricard.approval.dto.CancelRequest;
 import com.wooricard.approval.dto.CancelResponse;
+import com.wooricard.approval.entity.AuthorizationStatus;
 import com.wooricard.approval.service.AuthorizationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,16 +17,20 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 /**
  * 승인 컨트롤러
  * 카드 승인 요청을 수신하고 처리 결과를 반환합니다.
  */
 @RestController
-@RequestMapping("/api/authorization")
+@RequestMapping("/api/authorizations")
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "Authorization", description = "카드 승인 API")
@@ -256,7 +262,7 @@ public class AuthorizationController {
      * 예외 처리 핸들러
      * 컨트롤러에서 발생하는 예외를 처리합니다.
      * 
-     * @param e 예외
+     *
      * @return 에러 응답
      */
     @Operation(summary = "승인 취소", description = "승인된 거래를 취소합니다. 매출 확정(CONFIRMED) 상태는 취소 불가합니다.")
@@ -273,6 +279,19 @@ public class AuthorizationController {
         }
 
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "승인 내역 조회", description = "날짜 기준으로 승인 내역을 페이징 조회합니다.")
+    @GetMapping
+    public ResponseEntity<Page<ApprovalDto>> getAuthorizations(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "100") int size,
+            @RequestParam(defaultValue = "APPROVED") String status) {
+
+        AuthorizationStatus authorizationStatus = AuthorizationStatus.valueOf(status);
+        Page<ApprovalDto> result = authorizationService.getAuthorizations(date, authorizationStatus, page, size);
+        return ResponseEntity.ok(result);
     }
 
     @ExceptionHandler(Exception.class)
