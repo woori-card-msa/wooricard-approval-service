@@ -1,0 +1,3 @@
+rootProject.name = 'wooricard-billing-service'
+include ':common'
+project(':common').projectDir = file('../common')
