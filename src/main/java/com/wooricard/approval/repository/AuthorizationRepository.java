@@ -72,4 +72,14 @@ public interface AuthorizationRepository extends JpaRepository<Authorization, Lo
         @Param("endDate") LocalDateTime endDate,
         Pageable pageable
     );
+
+    @Query("SELECT a FROM Authorization a WHERE a.cardNumberMasked = :cardNumberMasked " +
+           "AND a.status = :status " +
+           "AND a.authorizationDate BETWEEN :startDate AND :endDate")
+    List<Authorization> findByCardNumberMaskedAndStatusAndDateRange(
+        @Param("cardNumberMasked") String cardNumberMasked,
+        @Param("status") AuthorizationStatus status,
+        @Param("startDate") LocalDateTime startDate,
+        @Param("endDate") LocalDateTime endDate
+    );
 }

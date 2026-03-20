@@ -2,6 +2,7 @@ package com.wooricard.approval.service;
 
 import com.wooricard.approval.client.BankClient;
 import com.wooricard.approval.dto.ApprovalDto;
+import com.wooricard.approval.dto.MonthlyApprovalDto;
 import com.wooricard.approval.dto.AuthorizationRequest;
 import com.wooricard.approval.dto.AuthorizationResponse;
 import com.wooricard.approval.dto.BalanceResponse;
@@ -24,7 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * 승인 서비스
@@ -435,6 +439,21 @@ public class AuthorizationService {
 
         return authorizationRepository.findByStatusAndDateRange(status, startOfDay, endOfDay, PageRequest.of(page, size))
                 .map(ApprovalDto::from);
+    }
+
+    /**
+     * 월별 승인 내역 조회 (카드번호 기준)
+     */
+    @Transactional(readOnly = true)
+    public List<MonthlyApprovalDto> getMonthlyApprovedByCard(String cardNumberMasked, YearMonth month) {
+        LocalDateTime startOfMonth = month.atDay(1).atStartOfDay();
+        LocalDateTime endOfMonth = month.atEndOfMonth().atTime(23, 59, 59);
+
+        return authorizationRepository.findByCardNumberMaskedAndStatusAndDateRange(
+                        cardNumberMasked, AuthorizationStatus.APPROVED, startOfMonth, endOfMonth)
+                .stream()
+                .map(MonthlyApprovalDto::from)
+                .collect(Collectors.toList());
     }
 
     /**
