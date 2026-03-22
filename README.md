@@ -267,8 +267,8 @@ GET /api/authorization/approved/monthly?cardNumberMasked=6011-****-****-1117&mon
 본 서비스는 중앙 설정 관리 서버가 필요합니다. 
 반드시 아래 서버를 먼저 구동한 후 실행해 주세요.
 
-1. **Eureka Server**: [이동하기](https://github.com/woori-card-msa/wooricard-eureka)
-2. **Config Server**: [이동하기](https://github.com/woori-card-msa/wooricard-config)
+1. **Eureka Server**: [이동하기](https://github.com/woori-card-msa/wooricard-eureka?tab=readme-ov-file#-%EC%8B%A4%ED%96%89-%EB%B0%A9%EB%B2%95-getting-started)
+2. **Config Server**: [이동하기](https://github.com/woori-card-msa/wooricard-config?tab=readme-ov-file#-%EC%8B%A4%ED%96%89-%EB%B0%A9%EB%B2%95-getting-started)
 
 > **Tip:** Config Server의 구동 방식이나 Git Repo 설정은 [해당 README.md](https://github.com/woori-card-msa/wooricard-config#readme)를 참고하세요.
 
