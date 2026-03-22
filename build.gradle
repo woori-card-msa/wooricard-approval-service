@@ -35,6 +35,7 @@ dependencies {
     
     // Spring Cloud
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
 
     // Swagger/OpenAPI
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
@@ -50,6 +51,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+
+    // .env
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
 }
 
 dependencyManagement {
